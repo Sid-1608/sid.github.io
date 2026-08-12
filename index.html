@@ -1,375 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tarun Siddhartha M — Counterparty Credit Risk</title>
-<meta name="description" content="Tarun Siddhartha M — Risk Management Professional, Counterparty Credit Risk, Basel III/IV, XVA, AI-augmented regulatory reporting.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#101826;
-    --ink-soft:#2b3648;
-    --paper:#FBFAF7;
-    --paper-line:#e7e3d8;
-    --accent:#a6741f;
-    --accent-2:#1f5c56;
-    --muted:#5b6472;
-    --max:920px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:var(--accent-2);}
-  a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
-
-  /* subtle ledger grid backdrop */
-  .grid-bg{
-    position:absolute; inset:0; z-index:-1; pointer-events:none;
-    background-image:
-      linear-gradient(var(--paper-line) 1px, transparent 1px);
-    background-size: 100% 42px;
-    opacity:.45;
-    mask-image: linear-gradient(to bottom, black, transparent 700px);
-  }
-
-  header.hero{position:relative; padding:64px 0 40px; overflow:hidden;}
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--accent); display:flex; align-items:center; gap:10px; margin-bottom:18px;
-  }
-  .eyebrow::before{content:""; width:22px; height:2px; background:var(--accent); display:inline-block;}
-  h1{
-    font-family:'Spectral', serif; font-weight:600;
-    font-size:clamp(38px, 6vw, 62px);
-    line-height:1.03; margin:0 0 14px; letter-spacing:-0.01em;
-  }
-  .role-line{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:14px; color:var(--ink-soft);
-    letter-spacing:.02em;
-    margin:0 0 30px;
-  }
-  .role-line .sep{color:var(--paper-line); margin:0 8px;}
-
-  .contact-row{
-    display:flex; flex-wrap:wrap; gap:10px 14px; align-items:center;
-    font-family:'IBM Plex Mono', monospace; font-size:13px;
-  }
-  .chip{
-    border:1px solid var(--paper-line); border-radius:2px;
-    padding:7px 12px; color:var(--ink-soft); text-decoration:none;
-    background:rgba(255,255,255,.5);
-  }
-  .chip.accent{border-color:var(--accent); color:var(--accent); font-weight:500;}
-  .chip:hover{border-color:var(--accent);}
-
-  /* exposure curve signature */
-  .curve-wrap{margin-top:46px;}
-  .curve-caption{
-    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--muted);
-    text-transform:uppercase; letter-spacing:.1em; margin-bottom:6px;
-  }
-  svg.curve{width:100%; height:auto; display:block;}
-  .curve-path{fill:none; stroke:var(--accent); stroke-width:2;}
-  .curve-area{fill:url(#curveFill);}
-  .curve-dot{fill:var(--paper); stroke:var(--accent); stroke-width:2;}
-  .curve-dot:hover{fill:var(--accent);}
-  .curve-label{font-family:'IBM Plex Mono', monospace; font-size:10px; fill:var(--muted);}
-  .curve-axis{stroke:var(--paper-line); stroke-width:1;}
-
-  section{padding:38px 0; border-top:1px solid var(--paper-line);}
-  h2{
-    font-family:'IBM Plex Mono', monospace; text-transform:uppercase;
-    font-size:12.5px; letter-spacing:.16em; color:var(--muted);
-    margin:0 0 22px;
-  }
-  .profile p{
-    font-family:'Spectral', serif; font-size:19px; font-style:italic;
-    color:var(--ink-soft); max-width:74ch; margin:0;
-  }
-
-  /* timeline */
-  .timeline{position:relative; padding-left:26px;}
-  .timeline::before{
-    content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px;
-    background:var(--paper-line);
-  }
-  .role{position:relative; margin-bottom:34px;}
-  .role:last-child{margin-bottom:0;}
-  .role::before{
-    content:""; position:absolute; left:-26px; top:6px; width:9px; height:9px;
-    border-radius:50%; background:var(--paper); border:2px solid var(--accent);
-  }
-  .role-head{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:4px;}
-  .role-title{font-family:'Spectral', serif; font-weight:600; font-size:19px;}
-  .role-dates{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted); white-space:nowrap;}
-  .role-org{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--accent-2); margin-bottom:10px;}
-  ul.bullets{margin:0; padding-left:18px; color:var(--ink-soft); font-size:15px;}
-  ul.bullets li{margin-bottom:6px;}
-  .role.legacy .role-title{font-size:16px;}
-  .role.legacy ul.bullets{font-size:14px; color:var(--muted);}
-
-  /* education */
-  .edu-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:22px;}
-  .edu-card{border-left:2px solid var(--paper-line); padding-left:14px;}
-  .edu-card .school{font-family:'Spectral', serif; font-weight:600; font-size:16px; margin-bottom:4px;}
-  .edu-card .deg{font-size:14px; color:var(--ink-soft); margin-bottom:4px;}
-  .edu-card .yr{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted);}
-
-  /* skills */
-  .skill-groups{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
-  .skill-group h3{
-    font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase;
-    letter-spacing:.1em; color:var(--accent); margin:0 0 12px; font-weight:500;
-  }
-  .tag-row{display:flex; flex-wrap:wrap; gap:8px;}
-  .tag{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; padding:6px 10px;
-    border:1px solid var(--paper-line); border-radius:2px; color:var(--ink-soft);
-  }
-
-  footer{padding:44px 0 60px; border-top:1px solid var(--paper-line);}
-  .footer-row{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px;}
-  .footer-note{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted);}
-  .btn{
-    font-family:'IBM Plex Mono', monospace; font-size:13px; text-decoration:none;
-    color:var(--paper); background:var(--ink); padding:12px 20px; border-radius:2px;
-    display:inline-block; letter-spacing:.02em;
-  }
-  .btn:hover{background:var(--accent-2);}
-
-  @media (max-width:680px){
-    .edu-grid{grid-template-columns:1fr;}
-    .skill-groups{grid-template-columns:1fr;}
-    .role-head{flex-direction:column; align-items:flex-start; gap:2px;}
-  }
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tarun Siddhartha M — Counterparty Credit Risk, Regulatory Transformation and AI-Augmented Risk Infrastructure.">
+  <title>Tarun Siddhartha M | Risk · Regulation · AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="noise"></div>
+  <div class="progress"><span id="progressBar"></span></div>
 
-<header class="hero">
-  <div class="grid-bg"></div>
-  <div class="wrap">
-    <div class="eyebrow">Curriculum Vitae</div>
-    <h1>Tarun Siddhartha M</h1>
-    <p class="role-line">Counterparty Credit Risk<span class="sep">·</span>Basel III/IV<span class="sep">·</span>XVA &amp; Derivative Pricing<span class="sep">·</span>AI-Augmented Risk Infrastructure</p>
-    <div class="contact-row">
-      <a class="chip" href="tel:+917406594416">+91 74065 94416</a>
-      <a class="chip accent" href="mailto:tsiddharth.m@gmail.com">tsiddharth.m@gmail.com</a>
-      <span class="chip">Hyderabad, India</span>
-      <a class="chip" href="Tarun_Siddhartha_M_CV.pdf" target="_blank" rel="noopener">Download résumé (PDF) ↓</a>
+  <header class="nav">
+    <a class="brand" href="#top">TS<span>.</span></a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#experience">Experience</a>
+      <a href="#impact">Impact</a>
+      <a href="#education">Education</a>
+    </nav>
+    <div class="nav-actions">
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">☾</button>
+      <a class="pill small" href="mailto:tsiddharth.m@gmail.com">Let's connect ↗</a>
     </div>
+  </header>
 
-    <div class="curve-wrap">
-      <div class="curve-caption">Career exposure profile — seniority over time, 2014–2026</div>
-      <svg class="curve" viewBox="0 0 900 160" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Line chart showing rising seniority from 2014 to present">
-        <defs>
-          <linearGradient id="curveFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#a6741f" stop-opacity="0.16"/>
-            <stop offset="100%" stop-color="#a6741f" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <line class="curve-axis" x1="0" y1="140" x2="900" y2="140"/>
-        <path class="curve-area" d="M10,132 C90,128 120,120 170,108 C230,94 260,86 320,78 C380,70 400,64 460,54 C520,44 540,40 600,32 C660,24 700,20 760,14 C800,10 840,8 880,6 L880,140 L10,140 Z"/>
-        <path class="curve-path" d="M10,132 C90,128 120,120 170,108 C230,94 260,86 320,78 C380,70 400,64 460,54 C520,44 540,40 600,32 C660,24 700,20 760,14 C800,10 840,8 880,6"/>
-        <g>
-          <circle class="curve-dot" cx="10" cy="132" r="4"><title>2014 — Senior Engineer, Power Solutions</title></circle>
-          <circle class="curve-dot" cx="170" cy="108" r="4"><title>2018 — Credit Risk Analyst, Barclays</title></circle>
-          <circle class="curve-dot" cx="320" cy="78" r="4"><title>2021 — Product Manager, Oracle FSS</title></circle>
-          <circle class="curve-dot" cx="460" cy="54" r="4"><title>2021 — Manager, HSBC Chennai</title></circle>
-          <circle class="curve-dot" cx="600" cy="32" r="4"><title>2022 — Manager, EY</title></circle>
-          <circle class="curve-dot" cx="760" cy="14" r="4"><title>2023 — Senior Manager, Standard Chartered</title></circle>
-          <circle class="curve-dot" cx="880" cy="6" r="5"><title>2025 — AVP, HSBC Holdings (present)</title></circle>
-        </g>
-        <text class="curve-label" x="10" y="155">2014</text>
-        <text class="curve-label" x="835" y="155">Present</text>
-      </svg>
-    </div>
-  </div>
-</header>
-
-<main class="wrap">
-
-  <section class="profile">
-    <h2>Profile</h2>
-    <p>Risk management professional with 10+ years across counterparty credit risk, derivative pricing, stress testing and IFRS 9. Proven track record implementing Basel III/IV, building advanced risk models, and translating regulatory change into working infrastructure — most recently by integrating generative and agentic AI tooling into regulatory reporting workflows.</p>
-  </section>
-
-  <section class="experience">
-    <h2>Experience</h2>
-    <div class="timeline">
-
-      <div class="role">
-        <div class="role-head">
-          <span class="role-title">Assistant Vice President</span>
-          <span class="role-dates">Sep 2025 — Present</span>
-        </div>
-        <div class="role-org">HSBC Holdings, Hyderabad</div>
-        <ul class="bullets">
-          <li>Spearheading a regulatory-driven product review program assessing counterparty credit risk derivative portfolios, auditing end-to-end regulatory compliance, exposure management and control framework effectiveness.</li>
-          <li>Deploying Generative AI &amp; Agentic AI solutions for regulatory reporting, Finance change implementations and AI-ready risk infrastructure.</li>
-          <li>Supporting the Basel 3.1 regulatory change program for CCR — interpreting new requirements and coordinating impact assessment across SA-CCR and IMM frameworks.</li>
-          <li>Conducting ad-hoc impact testing on derivative portfolios arising from regulatory model changes and data process adjustments.</li>
-        </ul>
-      </div>
-
-      <div class="role">
-        <div class="role-head">
-          <span class="role-title">Senior Manager</span>
-          <span class="role-dates">Jun 2023 — Aug 2025</span>
-        </div>
-        <div class="role-org">Standard Chartered Bank, Bangalore</div>
-        <ul class="bullets">
-          <li>Led design, development and validation of management stress testing models based on IFRS 9 to forecast PD, RWA and ECL across diverse industry sectors, using ML methods including Lasso and Ridge regression.</li>
-          <li>Identified and analyzed key stress areas within forward-looking macroeconomic scenarios impacting cashflows and default probabilities.</li>
-          <li>Leveraged AI-based development tools, including GitHub Copilot, to accelerate Python model development and validation.</li>
-          <li>Ran credit migration, FX and sovereign downgrade impact calculations on EAD and RWA; provided 3-year RWA and Tier 1 capital forecasts incorporating XVA considerations.</li>
-          <li>Built Tableau dashboards for NIM, RWA, EAD, ECL and capital metrics across regions, segments, counterparties and asset classes.</li>
-        </ul>
-      </div>
-
-      <div class="role">
-        <div class="role-head">
-          <span class="role-title">Manager</span>
-          <span class="role-dates">Sep 2022 — Jun 2023</span>
-        </div>
-        <div class="role-org">Ernst &amp; Young India, Bangalore</div>
-        <ul class="bullets">
-          <li>Conducted model audits (S166) and model implementation, validation and monitoring engagements in counterparty credit risk and derivative pricing.</li>
-          <li>Delivered EAD/RWA/EE/EEPE/PFE calculations for IMM, CEM and SA-CCR models from a regulatory standpoint.</li>
-          <li>Reviewed and validated XVA models, including CVA, DVA and FVA calculations.</li>
-        </ul>
-      </div>
-
-      <div class="role">
-        <div class="role-head">
-          <span class="role-title">Manager</span>
-          <span class="role-dates">Sep 2021 — Sep 2022</span>
-        </div>
-        <div class="role-org">HSBC Holdings, Chennai</div>
-        <ul class="bullets">
-          <li>Led implementation and validation of SA-CCR for EAD calculations under Basel IV for derivative products.</li>
-          <li>Designed process workflows for EAD/RWA calculation logic under SA-CCR (BCBS 279).</li>
-          <li>Managed regulatory reporting of EAD/RWA for OTC products under CEM/SA-CCR, including XVA components.</li>
-        </ul>
-      </div>
-
-      <div class="role legacy">
-        <div class="role-head">
-          <span class="role-title">Product Manager</span>
-          <span class="role-dates">Mar 2021 — Sep 2021</span>
-        </div>
-        <div class="role-org">Oracle Financial Services, Bangalore</div>
-        <ul class="bullets">
-          <li>Developed product roadmaps in credit risk, counterparty credit risk calculations and XVA for financial institutions across jurisdictions.</li>
-          <li>Led model development and validation for CCR calculation methodologies and XVA under Agile, for Basel IV.</li>
-        </ul>
-      </div>
-
-      <div class="role legacy">
-        <div class="role-head">
-          <span class="role-title">Credit Risk Analyst</span>
-          <span class="role-dates">Jun 2018 — Mar 2021</span>
-        </div>
-        <div class="role-org">Barclays Global Services, Chennai</div>
-        <ul class="bullets">
-          <li>Managed counterparty credit risk hotline activities, including trade approvals for SFTs and OTC derivatives.</li>
-          <li>Reported EL, PD and LGD across client portfolios; validated EAD and RWA models.</li>
-        </ul>
-      </div>
-
-      <div class="role legacy">
-        <div class="role-head">
-          <span class="role-title">Senior Engineer</span>
-          <span class="role-dates">Mar 2014 — Feb 2017</span>
-        </div>
-        <div class="role-org">Power Solutions Pvt Ltd &amp; Inel Power Sys</div>
-        <ul class="bullets">
-          <li>Led teams of 5–7 on testing and commissioning projects for clients including GE, ABB, Siemens and Crompton Greaves.</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="education">
-    <h2>Education</h2>
-    <div class="edu-grid">
-      <div class="edu-card">
-        <div class="school">Great Lakes Institute of Management, Chennai</div>
-        <div class="deg">MBA (PGPM), Finance &amp; Analytics</div>
-        <div class="yr">2017 — 2018</div>
-      </div>
-      <div class="edu-card">
-        <div class="school">Auckland University, New Zealand</div>
-        <div class="deg">PG Program in Engineering — Control &amp; RF Systems</div>
-        <div class="yr">2013 — 2014</div>
-      </div>
-      <div class="edu-card">
-        <div class="school">SASTRA University, Tamil Nadu</div>
-        <div class="deg">B.Tech, Electrical Engineering</div>
-        <div class="yr">2008 — 2012</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="skills">
-    <h2>Skills</h2>
-    <div class="skill-groups">
-      <div class="skill-group">
-        <h3>Domain</h3>
-        <div class="tag-row">
-          <span class="tag">Counterparty Credit Risk</span>
-          <span class="tag">SA-CCR / IMM / CEM</span>
-          <span class="tag">Basel III/IV</span>
-          <span class="tag">XVA — CVA / DVA / FVA</span>
-          <span class="tag">IFRS 9</span>
-          <span class="tag">Derivative Pricing &amp; Valuation</span>
-          <span class="tag">Stress Testing</span>
-          <span class="tag">Investment Banking &amp; Fixed Income</span>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-grid"></div>
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span class="pulse"></span> RISK · REGULATION · TECHNOLOGY</div>
+        <h1>Tarun<br><em>Siddhartha M.</em></h1>
+        <p class="hero-title">Counterparty Credit Risk <span>·</span> Regulatory Transformation <span>·</span> AI</p>
+        <p class="hero-lead">10+ years across counterparty credit risk, derivative pricing, stress testing and regulatory change — turning complex risk requirements into working models, controls and infrastructure.</p>
+        <div class="hero-actions">
+          <a class="pill" href="#experience">Explore my journey <span>↓</span></a>
+          <a class="text-link" href="resume.pdf">Download résumé ↗</a>
         </div>
       </div>
-      <div class="skill-group">
-        <h3>Tools &amp; Methods</h3>
-        <div class="tag-row">
-          <span class="tag">Python</span>
-          <span class="tag">SQL</span>
-          <span class="tag">Tableau</span>
-          <span class="tag">Advanced Excel</span>
-          <span class="tag">GitHub Copilot</span>
-          <span class="tag">GPT-5 / Claude — Agentic AI</span>
-          <span class="tag">Agile / JIRA</span>
-          <span class="tag">Business &amp; Process Analysis</span>
+
+      <div class="hero-orbit reveal">
+        <div class="orbit-core"><span>RISK<br>ENGINE</span></div>
+        <div class="orbit-ring ring1"></div><div class="orbit-ring ring2"></div>
+        <div class="orbit-dot d1">CCR</div>
+        <div class="orbit-dot d2">AI</div>
+        <div class="orbit-dot d3">SA-CCR</div>
+        <div class="orbit-dot d4">XVA</div>
+      </div>
+
+      <div class="hero-stats">
+        <div><strong data-count="10">0</strong><span>+ YEARS</span></div>
+        <div><strong>CCR</strong><span>CORE EXPERTISE</span></div>
+        <div><strong>BASEL</strong><span>III / IV</span></div>
+        <div><strong>AI</strong><span>RISK INFRASTRUCTURE</span></div>
+      </div>
+    </section>
+
+    <section id="about" class="section split">
+      <div class="section-label">01 / PROFILE</div>
+      <div class="section-content">
+        <p class="kicker">The intersection of <span>risk + regulation + technology.</span></p>
+        <h2>I build risk solutions that move from regulatory text to real-world decisions.</h2>
+        <p>Risk management professional with 10+ years across counterparty credit risk, derivative pricing, stress testing and IFRS 9. Proven track record implementing Basel III/IV, building advanced risk models, and translating regulatory change into working infrastructure — most recently by integrating generative and agentic AI tooling into regulatory reporting workflows.</p>
+      </div>
+    </section>
+
+    <section id="expertise" class="section">
+      <div class="section-label">02 / EXPERTISE</div>
+      <div class="section-content">
+        <div class="section-heading"><span>What I work with</span><h2>Deep domain. Practical delivery.</h2></div>
+        <div class="cards">
+          <article class="card featured"><div class="card-no">01</div><h3>Counterparty<br>Credit Risk</h3><p>SA-CCR · IMM · CEM · EAD · PFE · EE · EEPE</p><span class="card-arrow">↗</span></article>
+          <article class="card"><div class="card-no">02</div><h3>Regulatory<br>Capital</h3><p>Basel III/IV · Basel 3.1 · RWA · Regulatory Reporting</p><span class="card-arrow">↗</span></article>
+          <article class="card"><div class="card-no">03</div><h3>XVA & Derivative<br>Pricing</h3><p>CVA · DVA · FVA · Derivative Valuation</p><span class="card-arrow">↗</span></article>
+          <article class="card"><div class="card-no">04</div><h3>Credit Risk<br>& Stress Testing</h3><p>IFRS 9 · PD · LGD · ECL · Macroeconomic Stress</p><span class="card-arrow">↗</span></article>
+          <article class="card"><div class="card-no">05</div><h3>AI-Augmented<br>Risk</h3><p>Generative AI · Agentic AI · AI-ready regulatory infrastructure</p><span class="card-arrow">↗</span></article>
+          <article class="card"><div class="card-no">06</div><h3>Analytics &<br>Automation</h3><p>Python · SQL · Tableau · Excel · GitHub Copilot</p><span class="card-arrow">↗</span></article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-</main>
+    <section id="experience" class="section">
+      <div class="section-label">03 / EXPERIENCE</div>
+      <div class="section-content">
+        <div class="section-heading"><span>2014 — 2026</span><h2>A career built around increasingly complex risk.</h2></div>
+        <div class="timeline">
+          <article class="job active">
+            <div class="job-year">2025 — NOW</div><div class="job-dot"></div>
+            <div class="job-main"><div class="job-top"><h3>Assistant Vice President</h3><span>HSBC Holdings · Hyderabad</span></div>
+            <div class="tags"><b>CCR</b><b>Basel 3.1</b><b>GenAI</b><b>Agentic AI</b></div>
+            <div class="job-details"><ul>
+              <li>Spearheading a regulatory-driven product review program assessing counterparty credit risk derivative portfolios, regulatory compliance, exposure management and control effectiveness.</li>
+              <li>Deploying Generative AI & Agentic AI solutions for regulatory reporting, Finance change implementations and AI-ready risk infrastructure.</li>
+              <li>Supporting Basel 3.1 regulatory change for CCR across SA-CCR and IMM frameworks and conducting impact testing on derivative portfolios.</li>
+            </ul></div></div>
+          </article>
 
-<footer>
-  <div class="wrap">
-    <div class="footer-row">
-      <span class="footer-note">Last updated August 2026 · Hyderabad, India</span>
-      <a class="btn" href="mailto:tsiddharth.m@gmail.com">Get in touch →</a>
-    </div>
-  </div>
-</footer>
+          <article class="job">
+            <div class="job-year">2023 — 2025</div><div class="job-dot"></div>
+            <div class="job-main"><div class="job-top"><h3>Senior Manager</h3><span>Standard Chartered Bank · Bangalore</span></div>
+            <div class="tags"><b>IFRS 9</b><b>Stress Testing</b><b>ML</b><b>RWA</b></div>
+            <div class="job-details"><ul>
+              <li>Led design, development and validation of management stress testing models based on IFRS 9 to forecast PD, RWA and ECL.</li>
+              <li>Used Lasso and Ridge regression across forward-looking macroeconomic scenarios and analyzed stress drivers impacting cashflows and default probabilities.</li>
+              <li>Ran credit migration, FX and sovereign downgrade impact calculations on EAD and RWA; built Tableau dashboards for NIM, RWA, EAD, ECL and capital.</li>
+            </ul></div></div>
+          </article>
 
+          <article class="job">
+            <div class="job-year">2022 — 2023</div><div class="job-dot"></div>
+            <div class="job-main"><div class="job-top"><h3>Manager</h3><span>Ernst & Young India · Bangalore</span></div>
+            <div class="tags"><b>Model Audit</b><b>IMM</b><b>SA-CCR</b><b>XVA</b></div>
+            <div class="job-details"><ul>
+              <li>Conducted model audits (S166) and model implementation, validation and monitoring engagements in CCR and derivative pricing.</li>
+              <li>Delivered EAD/RWA/EE/EEPE/PFE calculations for IMM, CEM and SA-CCR models and reviewed XVA models including CVA, DVA and FVA.</li>
+            </ul></div></div>
+          </article>
+
+          <article class="job">
+            <div class="job-year">2021 — 2022</div><div class="job-dot"></div>
+            <div class="job-main"><div class="job-top"><h3>Manager</h3><span>HSBC Holdings · Chennai</span></div>
+            <div class="tags"><b>SA-CCR</b><b>Basel IV</b><b>EAD</b><b>RWA</b></div>
+            <div class="job-details"><ul>
+              <li>Led implementation and validation of SA-CCR for EAD calculations under Basel IV for derivative products.</li>
+              <li>Designed EAD/RWA calculation workflows and managed regulatory reporting for OTC products under CEM/SA-CCR.</li>
+            </ul></div></div>
+          </article>
+
+          <article class="job">
+            <div class="job-year">2021</div><div class="job-dot"></div>
+            <div class="job-main"><div class="job-top"><h3>Product Manager</h3><span>Oracle Financial Services · Bangalore</span></div>
+            <div class="tags"><b>Product</b><b>CCR</b><b>XVA</b><b>Basel IV</b></div>
+            <div class="job-details"><ul>
+              <li>Developed product roadmaps in credit risk, CCR calculations and XVA for financial institutions across jurisdictions.</li>
+              <li>Led model development and validation for CCR methodologies and XVA under Agile for Basel IV.</li>
+            </ul></div></div>
+          </article>
+
+          <article class="job">
+            <div class="job-year">2018 — 2021</div><div class="job-dot"></div>
+            <div class="job-main"><div class="job-top"><h3>Credit Risk Analyst</h3><span>Barclays Global Services · Chennai</span></div>
+            <div class="tags"><b>CCR</b><b>PD</b><b>LGD</b><b>EAD</b></div>
+            <div class="job-details"><ul>
+              <li>Managed counterparty credit risk hotline activities including trade approvals for SFTs and OTC derivatives.</li>
+              <li>Reported EL, PD and LGD across client portfolios and validated EAD and RWA models.</li>
+            </ul></div></div>
+          </article>
+
+          <article class="job">
+            <div class="job-year">2014 — 2017</div><div class="job-dot"></div>
+            <div class="job-main"><div class="job-top"><h3>Senior Engineer</h3><span>Power Solutions Pvt Ltd & Inel Power Sys</span></div>
+            <div class="tags"><b>Engineering</b><b>Leadership</b><b>Testing</b></div>
+            <div class="job-details"><ul><li>Led teams of 5–7 on testing and commissioning projects for GE, ABB, Siemens and Crompton Greaves.</li></ul></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="impact" class="section impact-section">
+      <div class="section-label">04 / SELECTED IMPACT</div>
+      <div class="section-content">
+        <div class="section-heading"><span>From regulation to implementation</span><h2>Selected areas where I create impact.</h2></div>
+        <div class="impact-grid">
+          <div class="impact-item"><span>01</span><h3>SA-CCR</h3><p>Implementation, validation, EAD/RWA calculation logic and regulatory reporting for derivatives.</p></div>
+          <div class="impact-item"><span>02</span><h3>IFRS 9</h3><p>Stress testing models spanning PD, RWA and ECL with forward-looking macroeconomic scenarios.</p></div>
+          <div class="impact-item"><span>03</span><h3>XVA</h3><p>CVA, DVA and FVA model review and derivative pricing methodologies.</p></div>
+          <div class="impact-item"><span>04</span><h3>AI + REGULATION</h3><p>Applying Generative AI and Agentic AI to regulatory reporting and risk infrastructure.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section split">
+      <div class="section-label">05 / EDUCATION</div>
+      <div class="section-content education">
+        <div class="edu"><span>2017 — 2018</span><h3>Great Lakes Institute of Management</h3><p>MBA (PGPM), Finance & Analytics · Chennai</p></div>
+        <div class="edu"><span>2013 — 2014</span><h3>Auckland University</h3><p>PG Program in Engineering — Control & RF Systems · New Zealand</p></div>
+        <div class="edu"><span>2008 — 2012</span><h3>SASTRA University</h3><p>B.Tech, Electrical Engineering · Tamil Nadu</p></div>
+      </div>
+    </section>
+
+    <section class="toolkit">
+      <div class="toolkit-inner">
+        <span>TOOLKIT</span>
+        <div class="marquee"><div>PYTHON · SQL · TABLEAU · ADVANCED EXCEL · GITHUB COPILOT · GPT-5 / CLAUDE · AGENTIC AI · AGILE / JIRA · BUSINESS & PROCESS ANALYSIS · </div></div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="eyebrow">LET'S CONNECT</div>
+      <h2>Have a risk problem worth solving?</h2>
+      <p>I'm open to conversations around counterparty credit risk, regulatory transformation, model risk and AI-enabled risk infrastructure.</p>
+      <div class="contact-actions">
+        <a class="pill" href="mailto:tsiddharth.m@gmail.com">tsiddharth.m@gmail.com ↗</a>
+        <a class="text-link" href="tel:+917406594416">+91 74065 94416</a>
+      </div>
+      <footer>© 2026 Tarun Siddhartha M · Hyderabad, India <span>Last updated August 2026</span></footer>
+    </section>
+  </main>
+  <script src="script.js"></script>
 </body>
 </html>
