@@ -1,44 +1,5 @@
-const body=document.body;
-const toggle=document.getElementById('themeToggle');
-toggle.addEventListener('click',()=>{
-  body.classList.toggle('light');
-  toggle.textContent=body.classList.contains('light')?'☀':'☾';
-  localStorage.setItem('theme',body.classList.contains('light')?'light':'dark');
-});
-if(localStorage.getItem('theme')==='light'){body.classList.add('light');toggle.textContent='☀'}
-
-const progress=document.getElementById('progressBar');
-window.addEventListener('scroll',()=>{
-  const h=document.documentElement.scrollHeight-window.innerHeight;
-  progress.style.width=(window.scrollY/h*100)+'%';
-},{passive:true});
-
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-document.querySelectorAll('.job').forEach(job=>{
-  job.addEventListener('click',()=>{
-    document.querySelectorAll('.job').forEach(j=>j.classList.remove('active'));
-    job.classList.add('active');
-  });
-});
-
-const counter=document.querySelector('[data-count]');
-let counted=false;
-const countObserver=new IntersectionObserver(entries=>{
-  if(entries[0].isIntersecting&&!counted){
-    counted=true; let n=0,target=+counter.dataset.count;
-    const tick=()=>{n+=.25;counter.textContent=Math.min(Math.round(n),target);if(n<target)requestAnimationFrame(tick)};
-    tick();
-  }
-});
-countObserver.observe(counter);
-
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const target=document.querySelector(a.getAttribute('href'));
-    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'})}
-  });
-});
+const body=document.body,theme=document.getElementById("theme");if(localStorage.theme==="dark"){body.classList.add("dark")}theme.onclick=()=>{body.classList.toggle("dark");localStorage.theme=body.classList.contains("dark")?"dark":"light"};
+const count=document.querySelector("[data-count]");let done=false;new IntersectionObserver(e=>{if(e[0].isIntersecting&&!done){done=true;let n=0;const go=()=>{n+=.2;count.textContent=Math.min(10,Math.floor(n));if(n<10)requestAnimationFrame(go)};go()}},{threshold:.5}).observe(count);
+const data={sa:["SA-CCR Implementation","Basel IV · EAD · RWA","Led implementation and validation of SA-CCR EAD calculations for derivative products, including regulatory reporting workflows and impact testing across portfolios."],ifrs:["IFRS 9 Stress Testing","PD · ECL · RWA · Macroeconomic scenarios","Designed and validated management stress testing models to forecast PD, RWA and ECL using forward-looking macroeconomic scenarios and regression techniques."],xva:["XVA & Model Review","CVA · DVA · FVA · Pricing","Worked across model audit, validation and monitoring engagements covering IMM, CEM, SA-CCR and XVA methodologies for derivative portfolios."],ai:["AI + Regulatory Reporting","GenAI · Agentic AI · Transformation","Applying Generative AI and Agentic AI to regulatory reporting, Finance change implementations and AI-ready risk infrastructure."]};
+const detail=document.getElementById("detail");function show(k){let x=data[k];detail.innerHTML=`<small>${x[1]}</small><h3>${x[0]}</h3><p>${x[2]}</p>`}show("sa");document.querySelectorAll(".project").forEach(b=>b.onclick=()=>{document.querySelectorAll(".project").forEach(x=>x.classList.remove("active"));b.classList.add("active");show(b.dataset.project)});
+document.querySelectorAll(".role").forEach(r=>r.onclick=()=>{document.querySelectorAll(".role").forEach(x=>x.classList.remove("open"));r.classList.add("open")});
